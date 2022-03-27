@@ -33,8 +33,10 @@ public class ClienteDAO {
 
     /**
      * Módulo 7. Devuelve los clientes por nombre (aproximación)
+     *
+     * @return List
      * */
-    public static List<Cliente> getClientesPorNombre(String nombre) {
+    public List<CabeceraUsoPuntos> getClientesPorNombre(String nombre) {
         return em.createQuery("" +
                                 "select c " +
                                 "from cliente c " +
@@ -46,8 +48,10 @@ public class ClienteDAO {
 
     /**
      * Módulo 7. Devuelve los clientes por apellido (aproximación)
+     *
+     * @return List
      * */
-    public static List<Cliente> getClientesPorApellido(String apellido) {
+    public List<Cliente> getClientesPorApellido(String apellido) {
         return em.createQuery("" +
                                 "select c " +
                                 "from cliente c " +
@@ -59,8 +63,10 @@ public class ClienteDAO {
 
     /**
      * Módulo 7. Devuelve los clientes por cumpleaños
+     *
+     * @return List
      * */
-    public static Object getClientesPorCumpleanhos(String cumpleanhos) {
+    public List<Cliente> getClientesPorCumpleanhos(String cumpleanhos) {
         return em.createQuery("" +
                                 "select c " +
                                 "from cliente c " +

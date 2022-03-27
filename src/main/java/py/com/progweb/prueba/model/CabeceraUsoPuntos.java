@@ -30,10 +30,9 @@ public class CabeceraUsoPuntos {
     @Basic(optional = false)
     private Date fecha;
 
-    // TODO: Ponerle el nombre correcto de la tabla a la que está apuntando
     @ManyToOne
-    @JoinColumn(name = "concepto_uso_punto")
-    private ConceptoUsoPunto conceptoUsoPunto;
+    @JoinColumn(name = "id_concepto_uso_puntos")
+    private ConceptoPuntos conceptoPuntos;
 
     public CabeceraUsoPuntos() {
     }
@@ -70,11 +69,11 @@ public class CabeceraUsoPuntos {
         this.fecha = fecha;
     }
 
-    public ConceptoUsoPunto getConceptoUsoPunto() {
-        return conceptoUsoPunto;
+    public ConceptoPuntos getConceptoPuntos() {
+        return conceptoPuntos;
     }
 
-    public void setConceptoUsoPunto(ConceptoUsoPunto conceptoUsoPunto) {
-        this.conceptoUsoPunto = conceptoUsoPunto;
+    public void setConceptoUsoPunto(ConceptoPuntos conceptoUsoPunto) {
+        this.conceptoPuntos = conceptoUsoPunto;
     }
 }

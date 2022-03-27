@@ -38,8 +38,10 @@ public class CabeceraUsoPuntosDAO {
 
     /**
      * Devuelve una lista con los usos de los puntos filtrados por concepto de uso
+     *
+     * @return List
      * */
-    public static List<CabeceraUsoPuntos> getCabecerasPorConcepto(Integer id_concepto){
+    public List<CabeceraUsoPuntos> getCabecerasPorConcepto(Integer id_concepto){
         return em.createQuery("" +
                         "select c " +
                         "from cabecera_uso_puntos c " +
@@ -51,8 +53,10 @@ public class CabeceraUsoPuntosDAO {
 
     /**
      * Devuelve una lista con los usos de los puntos filtrados por fecha de uso
+     *
+     * @return List
      * */
-    public static List<CabeceraUsoPuntos> getCabecerasPorFechaUso(Date fecha_uso){
+    public List<CabeceraUsoPuntos> getCabecerasPorFechaUso(Date fecha_uso){
         return em.createQuery("" +
                         "select c " +
                         "from cabecera_uso_puntos c " +
@@ -64,8 +68,10 @@ public class CabeceraUsoPuntosDAO {
 
     /**
      * Devuelve una lista con los usos de los puntos filtrados por cliente
+     *
+     * @return List
      * */
-    public static List<CabeceraUsoPuntos> getCabecerasPorCliente(Integer id){
+    public List<CabeceraUsoPuntos> getCabecerasPorCliente(Integer id){
         return em.createQuery("" +
                         "select c " +
                         "from cabecera_uso_puntos c " +

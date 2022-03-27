@@ -1,5 +1,6 @@
 package py.com.progweb.prueba.rest;
 
+import org.json.simple.JSONObject;
 import py.com.progweb.prueba.ejb.CabeceraUsoPuntosDAO;
 import py.com.progweb.prueba.ejb.ClienteDAO;
 
@@ -21,8 +22,8 @@ public class ConsultaResource {
     @Inject
     private CabeceraUsoPuntosDAO cabeceraUsoPuntosDAO;
 
-    @Inject
-    private BolsaPuntosDAO bolsaPuntosDAO;
+//    @Inject
+//    private BolsaPuntosDAO bolsaPuntosDAO;
 
     @Inject
     private ClienteDAO clienteDAO;
@@ -65,11 +66,11 @@ public class ConsultaResource {
     /**
      * Devuelve una lista con las bolsas de puntos por clientes
      * */
-    @GET
-    @Path("/bolsa_puntos_por_cliente/{id}")
-    public Response bolsaPuntosPorCliente(@PathParam("id") Integer id){
-        return Response.ok(bolsaPuntosDAO.getBolsasPorCliente(id)).build();
-    }
+//    @GET
+//    @Path("/bolsa_puntos_por_cliente/{id}")
+//    public Response bolsaPuntosPorCliente(@PathParam("id") Integer id){
+//        return Response.ok(bolsaPuntosDAO.getBolsasPorCliente(id)).build();
+//    }
 
     // TODO: Ponerle el nombre correcto de BolsaPuntosDAO cuando esté el módulo 5
     // TODO: También armar dentro de la clase el método para realizar esta funcionalidad bolsaPuntosPorRango
@@ -77,12 +78,11 @@ public class ConsultaResource {
      * Consume un JSON y devuelve una lista con las bolsas de puntos por clientes
      * JSON: [{ "inicio": i, "fin": f }]
      * */
-    @GET
-    @Path("/bolsa_puntos_por_rango_puntos/")
-    @Consumes({ MediaType.APPLICATION_JSON })
-    public Response bolsaPuntosPorRango(RequestBody requestBody){
-        return Response.ok(bolsaPuntosDAO.getBolsasPorRangoPuntos(requestBody.inicio, requestBody.fin)).build();
-    }
+//    @GET
+//    @Path("/bolsa_puntos_por_rango_puntos/")
+//    public Response bolsaPuntosPorRango(JSONObject json){
+//        return Response.ok(bolsaPuntosDAO.getBolsasPorRangoPuntos(json.get("inicio"), json.get("fin"))).build();
+//    }
 
     // Bolsa de Puntos - Clientes
 
@@ -91,11 +91,11 @@ public class ConsultaResource {
     /**
      * Devuelve una lista con los clientes con puntos a vencer en x días
      * */
-    @GET
-    @Path("/clientes_con_puntos_a_vencer_en/{x}")
-    public Response clientesConPuntosVencerEnX(@PathParam("x") Integer id){
-        return Response.ok(bolsaPuntosDAO.getClientesConPuntosVencerEnX(x)).build();
-    }
+//    @GET
+//    @Path("/clientes_con_puntos_a_vencer_en/{x}")
+//    public Response clientesConPuntosVencerEnX(@PathParam("x") Integer id){
+//        return Response.ok(bolsaPuntosDAO.getClientesConPuntosVencerEnX(x)).build();
+//    }
 
 
     // ==== Clientes ==== //
@@ -114,7 +114,7 @@ public class ConsultaResource {
      * */
     @GET
     @Path("/clientes_apellido/{apellido}")
-    public Response clientesPorApellido(@PathParam("apellido") String nombre){
+    public Response clientesPorApellido(@PathParam("apellido") String apellido){
         return Response.ok(clienteDAO.getClientesPorApellido(apellido)).build();
     }
 
@@ -123,7 +123,7 @@ public class ConsultaResource {
      * */
     @GET
     @Path("/clientes_por_cumpleanhos/{cumpleanhos}")
-    public Response clientesPorApellido(@PathParam("cumpleanhos") String cumpleanhos){
+    public Response clientesPorCumpleanhos(@PathParam("cumpleanhos") String cumpleanhos){
         return Response.ok(clienteDAO.getClientesPorCumpleanhos(cumpleanhos)).build();
     }
 }

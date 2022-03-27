@@ -24,7 +24,41 @@ public class DetalleUsoPuntos {
     private Integer puntajeUtilizado;
 
     // TODO: Ponerle el nombre correcto de la tabla a la que está apuntando
-    @ManyToOne
-    @JoinColumn(name = "id_bolsa_de_puntos")
-    private BolsaDePuntos idBolsaDePuntos;
+//    @ManyToOne
+//    @JoinColumn(name = "id_bolsa_de_puntos")
+//    private BolsaDePuntos idBolsaDePuntos;
+
+    public DetalleUsoPuntos(){}
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public CabeceraUsoPuntos getIdCabecera() {
+        return idCabecera;
+    }
+
+    public void setIdCabecera(CabeceraUsoPuntos idCabecera) {
+        this.idCabecera = idCabecera;
+    }
+
+    public Integer getPuntajeUtilizado() {
+        return puntajeUtilizado;
+    }
+
+    public void setPuntajeUtilizado(Integer puntajeUtilizado) {
+        this.puntajeUtilizado = puntajeUtilizado;
+    }
+
+//    public BolsaDePuntos getIdBolsaDePuntos() {
+//        return idBolsaDePuntos;
+//    }
+//
+//    public void setIdBolsaDePuntos(BolsaDePuntos idBolsaDePuntos) {
+//        this.idBolsaDePuntos = idBolsaDePuntos;
+//    }
 }
