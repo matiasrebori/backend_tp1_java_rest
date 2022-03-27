@@ -24,7 +24,6 @@ public class ServiciosResource {
 //    @Inject
 //    private ConceptoUsoPuntosDAO conceptousoPuntosDAO;
 
-    // TODO: POST utilizar puntos
 
 //    /**
 //     * Consume un JSON para cargar los puntos a un cliente a través del monto de su operación
@@ -73,11 +72,12 @@ public class ServiciosResource {
 //
 //        // intentar descontar los puntos del cliente
 //
-//        // obtener las bolsas de puntos del cliente
+//        // obtener las bolsas de puntos del cliente ordenadas por fecha caducidad
 //        List<BolsaPuntos> listabolsas = em.createQuery("" +
 //                                "select b " +
 //                                "from bolsa_puntos b " +
-//                                "where b.id_cliente=:id_cliente",
+//                                "where b.id_cliente=:id_cliente " +
+//                                "order by b.fecha_caducidad",
 //                        CabeceraUsoPuntos.class)
 //                .setParameter("id_cliente", json.get("id_cliente"))
 //                .getResultList();
