@@ -6,7 +6,7 @@ import javax.persistence.*;
 public class Puntos {
     @Id
     @GeneratedValue(generator = "puntosSeq", strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(name = "puntosSeq", sequenceName = "puntos_Seq", allocationSize = 0)
+    @SequenceGenerator(name = "puntosSeq", sequenceName = "puntos_sec", allocationSize = 0)
     @Basic(optional = false)
     @Column(name = "id_puntos")
     private Integer id;
@@ -17,7 +17,11 @@ public class Puntos {
 
     @Column(name = "lim_sup")
     @Basic(optional = false)
-    private String lim_sup;
+    private Integer lim_sup;
+
+    @Column(name = "monto_equivalencia")
+    @Basic(optional = false)
+    private Integer monto_equivalencia;
 
     public Puntos(){
 
@@ -39,11 +43,19 @@ public class Puntos {
         this.lim_inf = lim_inf;
     }
 
-    public String getLim_sup() {
+    public Integer getLim_sup() {
         return lim_sup;
     }
 
-    public void setLim_sup(String lim_sup) {
+    public void setLim_sup(Integer lim_sup) {
         this.lim_sup = lim_sup;
+    }
+
+    public Integer getMonto_equivalencia() {
+        return monto_equivalencia;
+    }
+
+    public void setMonto_equivalencia(Integer monto_equivalencia) {
+        this.monto_equivalencia = monto_equivalencia;
     }
 }
