@@ -1,0 +1,35 @@
+###
+# listar
+GET http://localhost:8080/prueba/tipoDocumento
+Accept: application/json
+
+###
+# obtener
+GET http://localhost:8080/prueba/tipoDocumento/2/
+Accept: application/json
+
+###
+# guardar
+POST http://localhost:8080/prueba/tipoDocumento
+Content-Type: application/json
+
+{
+  "descripcion": "Pasaporte"
+}
+
+###
+# actualizar
+PUT http://localhost:8080/prueba/tipoDocumento
+Content-Type: application/json
+
+{
+  "id": 2,
+  "descripcion": "Pasaporte Nuevo"
+}
+
+###
+# eliminar
+DELETE http://localhost:8080/prueba/tipoDocumento/2/
+Accept: application/json
+
+
