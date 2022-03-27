@@ -80,13 +80,15 @@ public class Cliente {
     private String telefono;
 
     @Column(name = "fecha_nacimiento")
+    @Temporal(TemporalType.DATE)
+    @Basic
     private Date fechaNacimiento;
 
-    @OneToOne()
+    @ManyToOne
     @JoinColumn(name = "nacionalidad_fk", referencedColumnName = "id")
     private Nacionalidad nacionalidad;
 
-    @OneToOne()
+    @ManyToOne
     @JoinColumn(name = "tipo_documento_fk", referencedColumnName = "id")
     private TipoDocumento tipoDocumento;
 

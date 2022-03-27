@@ -18,4 +18,32 @@ public class ConceptoPuntos {
     @Column(name = "puntos_requeridos")
     @Basic(optional = false)
     private Integer puntosRequeridos;
+
+    public ConceptoPuntos(){
+
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public Integer getPuntosRequeridos() {
+        return puntosRequeridos;
+    }
+
+    public void setPuntosRequeridos(Integer puntosRequeridos) {
+        this.puntosRequeridos = puntosRequeridos;
+    }
 }

@@ -5,6 +5,8 @@ import py.com.progweb.prueba.model.Cliente;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import java.util.ArrayList;
 import java.util.List;
 
 @Stateless
@@ -23,6 +25,10 @@ public class ClienteDAO {
 
     public void crear(Cliente cliente) {
         this.em.persist(cliente);
+    }
+
+    public void actualizar(Cliente cliente) {
+        this.em.merge(cliente);
     }
 
     public void eliminar(Integer id) {

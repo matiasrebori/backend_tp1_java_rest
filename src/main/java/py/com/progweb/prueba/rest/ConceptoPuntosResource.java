@@ -1,51 +1,50 @@
 package py.com.progweb.prueba.rest;
 
-
 import org.json.simple.JSONObject;
-import py.com.progweb.prueba.ejb.NacionalidadDAO;
-import py.com.progweb.prueba.model.Nacionalidad;
+import py.com.progweb.prueba.ejb.ConceptoPuntosDAO;
+import py.com.progweb.prueba.model.ConceptoPuntos;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 
-@Path("/nacionalidad")
+@Path("/conceptoPuntos")
 @Consumes("application/json")
 @Produces("application/json")
-public class NacionalidadResource {
+public class ConceptoPuntosResource {
 
     @Inject
-    private NacionalidadDAO nacionalidadDAO;
+    private ConceptoPuntosDAO conceptoPuntosDAO;
 
     @GET
     public Response listar() {
-        return Response.ok(nacionalidadDAO.listar()).build();
+        return Response.ok(conceptoPuntosDAO.listar()).build();
     }
 
     @GET
     @Path("/{id}")
     public Response obtener(@PathParam("id") Integer id) {
-        return Response.ok(nacionalidadDAO.obtener(id)).build();
+        return Response.ok(conceptoPuntosDAO.obtener(id)).build();
     }
 
     @POST
-    public Response crear(Nacionalidad c) {
-        nacionalidadDAO.crear(c);
+    public Response crear(ConceptoPuntos c) {
+        conceptoPuntosDAO.crear(c);
         return Response.ok(c).build();
     }
 
     @PUT
-    public Response actualizar(Nacionalidad c) {
-        nacionalidadDAO.actualizar(c);
+    public Response actualizar(ConceptoPuntos c) {
+        conceptoPuntosDAO.actualizar(c);
         return Response.ok(c).build();
     }
 
     @DELETE
     @Path("/{id}")
     public Response eliminar(@PathParam("id") Integer id) {
-        nacionalidadDAO.eliminar(id);
+        conceptoPuntosDAO.eliminar(id);
         JSONObject response = new JSONObject();
-        response.put("message", "Nacionalidad eliminada");
+        response.put("message", "ConceptoPuntos eliminado");
         return Response.ok(response.toString()).build();
     }
 }

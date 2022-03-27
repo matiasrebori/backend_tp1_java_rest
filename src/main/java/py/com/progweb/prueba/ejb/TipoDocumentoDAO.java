@@ -1,5 +1,6 @@
 package py.com.progweb.prueba.ejb;
 
+import py.com.progweb.prueba.model.Cliente;
 import py.com.progweb.prueba.model.TipoDocumento;
 
 import javax.ejb.Stateless;
@@ -23,6 +24,10 @@ public class TipoDocumentoDAO {
 
     public void crear(TipoDocumento tipoDocumento) {
         this.em.persist(tipoDocumento);
+    }
+
+    public void actualizar(TipoDocumento tipoDocumento) {
+        this.em.merge(tipoDocumento);
     }
 
     public void eliminar(Integer id) {

@@ -1,6 +1,7 @@
 package py.com.progweb.prueba.ejb;
 
 
+import py.com.progweb.prueba.model.Cliente;
 import py.com.progweb.prueba.model.Nacionalidad;
 import py.com.progweb.prueba.model.TipoDocumento;
 
@@ -25,6 +26,10 @@ public class NacionalidadDAO {
 
     public void crear(Nacionalidad nacionalidad) {
         this.em.persist(nacionalidad);
+    }
+
+    public void actualizar(Nacionalidad nacionalidad) {
+        this.em.merge(nacionalidad);
     }
 
     public void eliminar(Integer id) {
