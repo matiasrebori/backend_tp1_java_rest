@@ -22,16 +22,22 @@ public class TipoDocumentoResource {
         return Response.ok(tipoDocumentoDAO.listar()).build();
     }
 
+    @GET
+    @Path("/{id}")
+    public Response obtener(@PathParam("id") Integer id) {
+        return Response.ok(tipoDocumentoDAO.obtener(id)).build();
+    }
+
     @POST
     public Response crear(TipoDocumento c) {
         tipoDocumentoDAO.crear(c);
         return Response.ok(c).build();
     }
 
-    @GET
-    @Path("/{id}")
-    public Response obtener(@PathParam("id") Integer id) {
-        return Response.ok(tipoDocumentoDAO.obtener(id)).build();
+    @PUT
+    public Response actualizar(TipoDocumento c) {
+        tipoDocumentoDAO.actualizar(c);
+        return Response.ok(c).build();
     }
 
     @DELETE
@@ -39,7 +45,7 @@ public class TipoDocumentoResource {
     public Response eliminar(@PathParam("id") Integer id) {
         tipoDocumentoDAO.eliminar(id);
         JSONObject response = new JSONObject();
-        response.put("message", "Persona eliminada");
+        response.put("message", "TipoDocumento eliminado");
         return Response.ok(response.toString()).build();
     }
 }

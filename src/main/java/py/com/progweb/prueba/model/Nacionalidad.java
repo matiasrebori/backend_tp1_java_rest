@@ -15,8 +15,6 @@ public class Nacionalidad {
     @Basic(optional = false)
     private String descripcion;
 
-    @OneToOne(mappedBy = "nacionalidad")
-    private Cliente cliente;
 
     public Nacionalidad(){
 
@@ -38,11 +36,4 @@ public class Nacionalidad {
         this.descripcion = descripcion;
     }
 
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
 }

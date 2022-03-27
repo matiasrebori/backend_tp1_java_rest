@@ -16,8 +16,6 @@ public class TipoDocumento {
     @Basic(optional = false)
     private String descripcion;
 
-    @OneToOne(mappedBy = "tipoDocumento")
-    private Cliente cliente;
 
     public TipoDocumento(){
 
@@ -39,11 +37,4 @@ public class TipoDocumento {
         this.descripcion = descripcion;
     }
 
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
 }

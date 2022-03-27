@@ -1,0 +1,37 @@
+###
+# listar
+GET http://localhost:8080/prueba/conceptoPuntos
+Accept: application/json
+
+###
+# obtener
+GET http://localhost:8080/prueba/conceptoPuntos/2/
+Accept: application/json
+
+###
+# guardar
+POST http://localhost:8080/prueba/conceptoPuntos
+Content-Type: application/json
+
+{
+  "descripcion": "Vale de combustible 25mil gs",
+  "puntosRequeridos": 9
+}
+
+###
+# actualizar
+PUT http://localhost:8080/prueba/conceptoPuntos
+Content-Type: application/json
+
+{
+  "id": 3,
+  "descripcion": "Vale de combustible 25mil gs",
+  "puntosRequeridos": 10
+}
+
+###
+# eliminar
+DELETE http://localhost:8080/prueba/conceptoPuntos/3/
+Accept: application/json
+
+

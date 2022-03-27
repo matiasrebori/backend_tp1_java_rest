@@ -1,0 +1,61 @@
+###
+# listar
+GET http://localhost:8080/prueba/clientes
+Accept: application/json
+
+###
+# obtener
+GET http://localhost:8080/prueba/clientes/6/
+Accept: application/json
+
+###
+# guardar
+POST http://localhost:8080/prueba/clientes
+Content-Type: application/json
+
+{
+  "nombre": "Juan",
+  "apellido": "Verdun",
+  "nroDocumento": "4456321",
+  "email": "juanv@gmail.com",
+  "telefono": "0985145778",
+  "fechaNacimiento": "2001-05-10",
+  "nacionalidad": {
+    "id": 2,
+    "descripcion": "Paraguaya"
+  },
+  "tipoDocumento": {
+    "id": 2,
+    "descripcion": "Cedula de identidad"
+  }
+}
+
+###
+# actualizar
+PUT http://localhost:8080/prueba/clientes
+Content-Type: application/json
+
+{
+  "id": 11,
+  "nombre": "Juan",
+  "apellido": "Verdun",
+  "nroDocumento": "4456321",
+  "email": "juanver@gmail.com",
+  "telefono": "0985145778",
+  "fechaNacimiento": "2001-05-10",
+  "nacionalidad": {
+    "id": 2,
+    "descripcion": "Paraguaya"
+  },
+  "tipoDocumento": {
+    "id": 2,
+    "descripcion": "Cedula de identidad"
+  }
+}
+
+###
+# eliminar
+DELETE http://localhost:8080/prueba/clientes/11/
+Accept: application/json
+
+

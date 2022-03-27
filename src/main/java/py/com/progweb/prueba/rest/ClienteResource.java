@@ -6,6 +6,7 @@ import py.com.progweb.prueba.model.Cliente;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @Path("/clientes")
@@ -21,16 +22,22 @@ public class ClienteResource {
         return Response.ok(clienteDAO.listar()).build();
     }
 
+    @GET
+    @Path("/{id}")
+    public Response obtener(@PathParam("id") Integer id) {
+        return Response.ok(clienteDAO.obtener(id)).build();
+    }
+
     @POST
     public Response crear(Cliente c) {
         clienteDAO.crear(c);
         return Response.ok(c).build();
     }
 
-    @GET
-    @Path("/{id}")
-    public Response obtener(@PathParam("id") Integer id) {
-        return Response.ok(clienteDAO.obtener(id)).build();
+    @PUT
+    public Response actualizar(Cliente c) {
+        clienteDAO.actualizar(c);
+        return Response.ok(c).build();
     }
 
     @DELETE

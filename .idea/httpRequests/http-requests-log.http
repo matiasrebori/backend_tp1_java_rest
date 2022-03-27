@@ -1,0 +1,253 @@
+GET http://localhost:8080/prueba/clientes
+Accept: application/json
+
+<> 2022-03-27T144007.200.json
+
+###
+
+GET http://localhost:8080/prueba/clientes
+Accept: application/json
+
+<> 2022-03-27T144000.200.json
+
+###
+
+DELETE http://localhost:8080/prueba/clientes/11/
+Accept: application/json
+
+<> 2022-03-27T143956.200.json
+
+###
+
+GET http://localhost:8080/prueba/clientes
+Accept: application/json
+
+<> 2022-03-27T143949.200.json
+
+###
+
+PUT http://localhost:8080/prueba/clientes
+Content-Type: application/json
+
+{
+  "id": 11,
+  "nombre": "Juan",
+  "apellido": "Verdun",
+  "nroDocumento": "4456321",
+  "email": "juanver@gmail.com",
+  "telefono": "0985145778",
+  "fechaNacimiento": "2001-05-10",
+  "nacionalidad": {
+    "id": 2,
+    "descripcion": "Paraguaya"
+  },
+  "tipoDocumento": {
+    "id": 2,
+    "descripcion": "Cedula de identidad"
+  }
+}
+
+<> 2022-03-27T143937.200.json
+
+###
+
+POST http://localhost:8080/prueba/clientes
+Content-Type: application/json
+
+{
+  "nombre": "Juan",
+  "apellido": "Verdun",
+  "nroDocumento": "4456321",
+  "email": "juanv@gmail.com",
+  "telefono": "0985145778",
+  "fechaNacimiento": "2001-05-10",
+  "nacionalidad": {
+    "id": 2,
+    "descripcion": "Paraguaya"
+  },
+  "tipoDocumento": {
+    "id": 2,
+    "descripcion": "Cedula de identidad"
+  }
+}
+
+<> 2022-03-27T143913.200.json
+
+###
+
+GET http://localhost:8080/prueba/clientes/6/
+Accept: application/json
+
+<> 2022-03-27T143749.200.json
+
+###
+
+GET http://localhost:8080/prueba/clientes
+Accept: application/json
+
+<> 2022-03-27T143737.200.json
+
+###
+
+GET http://localhost:8080/prueba/conceptoPuntos
+Accept: application/json
+
+<> 2022-03-27T143714.200.json
+
+###
+
+DELETE http://localhost:8080/prueba/conceptoPuntos/3/
+Accept: application/json
+
+<> 2022-03-27T143704.200.json
+
+###
+
+GET http://localhost:8080/prueba/conceptoPuntos
+Accept: application/json
+
+<> 2022-03-27T143655.200.json
+
+###
+
+PUT http://localhost:8080/prueba/conceptoPuntos
+Content-Type: application/json
+
+{
+  "id": 3,
+  "descripcion": "Vale de combustible 25mil gs",
+  "puntosRequeridos": 10
+}
+
+<> 2022-03-27T143651.200.json
+
+###
+
+GET http://localhost:8080/prueba/conceptoPuntos
+Accept: application/json
+
+<> 2022-03-27T143636.200.json
+
+###
+
+POST http://localhost:8080/prueba/conceptoPuntos
+Content-Type: application/json
+
+{
+  "descripcion": "Vale de combustible 25mil gs",
+  "puntosRequeridos": 9
+}
+
+<> 2022-03-27T143621.200.json
+
+###
+
+GET http://localhost:8080/prueba/conceptoPuntos
+Accept: application/json
+
+<> 2022-03-27T143613.200.json
+
+###
+
+GET http://localhost:8080/prueba/conceptoPuntos
+Accept: application/json
+
+<> 2022-03-27T143610.200.json
+
+###
+
+GET http://localhost:8080/prueba/conceptoPuntos
+Accept: application/json
+
+<> 2022-03-27T143541.200.json
+
+###
+
+GET http://localhost:8080/prueba/conceptoPuntos
+Accept: application/json
+
+<> 2022-03-27T143532.200.json
+
+###
+
+GET http://localhost:8080/prueba/tipoDocumento/2/
+Accept: application/json
+
+<> 2022-03-27T143349.200.json
+
+###
+
+GET http://localhost:8080/prueba/tipoDocumento
+Accept: application/json
+
+<> 2022-03-27T143342.200.json
+
+###
+
+GET http://localhost:8080/prueba/nacionalidad
+Accept: application/json
+
+<> 2022-03-27T143255.200.json
+
+###
+
+DELETE http://localhost:8080/prueba/nacionalidad/4/
+Accept: application/json
+
+<> 2022-03-27T143252.200.json
+
+###
+
+GET http://localhost:8080/prueba/nacionalidad
+Accept: application/json
+
+<> 2022-03-27T143225.200.json
+
+###
+
+GET http://localhost:8080/prueba/nacionalidad/4/
+Accept: application/json
+
+<> 2022-03-27T143222.200.json
+
+###
+
+PUT http://localhost:8080/prueba/nacionalidad
+Content-Type: application/json
+
+{
+  "id": 4,
+  "descripcion": "Brazil"
+}
+
+<> 2022-03-27T143032.200.json
+
+###
+
+POST http://localhost:8080/prueba/nacionalidad
+Content-Type: application/json
+
+{
+  "descripcion": "Brasil"
+}
+
+<> 2022-03-27T142926.200.json
+
+###
+
+GET http://localhost:8080/prueba/clientes
+Accept: application/json
+
+<> 2022-03-27T142431.200.json
+
+###
+
+GET http://localhost:8080/prueba/clientes
+Accept: application/json
+
+###
+
+GET http://localhost:8080/prueba/clientes
+
+###
+
