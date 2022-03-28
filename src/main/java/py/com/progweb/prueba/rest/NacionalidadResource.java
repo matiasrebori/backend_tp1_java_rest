@@ -1,51 +1,51 @@
 package py.com.progweb.prueba.rest;
 
+
 import org.json.simple.JSONObject;
-import py.com.progweb.prueba.ejb.ClienteDAO;
-import py.com.progweb.prueba.model.Cliente;
+import py.com.progweb.prueba.ejb.NacionalidadDAO;
+import py.com.progweb.prueba.model.Nacionalidad;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Path("/clientes")
+@Path("/nacionalidad")
 @Consumes("application/json")
 @Produces("application/json")
-public class ClienteResource {
+public class NacionalidadResource {
 
     @Inject
-    private ClienteDAO clienteDAO;
+    private NacionalidadDAO nacionalidadDAO;
 
     @GET
     public Response listar() {
-        return Response.ok(clienteDAO.listar()).build();
+        return Response.ok(nacionalidadDAO.listar()).build();
     }
 
     @GET
     @Path("/{id}")
     public Response obtener(@PathParam("id") Integer id) {
-        return Response.ok(clienteDAO.obtener(id)).build();
+        return Response.ok(nacionalidadDAO.obtener(id)).build();
     }
 
     @POST
-    public Response crear(Cliente c) {
-        clienteDAO.crear(c);
+    public Response crear(Nacionalidad c) {
+        nacionalidadDAO.crear(c);
         return Response.ok(c).build();
     }
 
     @PUT
-    public Response actualizar(Cliente c) {
-        clienteDAO.actualizar(c);
+    public Response actualizar(Nacionalidad c) {
+        nacionalidadDAO.actualizar(c);
         return Response.ok(c).build();
     }
 
     @DELETE
     @Path("/{id}")
     public Response eliminar(@PathParam("id") Integer id) {
-        clienteDAO.eliminar(id);
+        nacionalidadDAO.eliminar(id);
         JSONObject response = new JSONObject();
-        response.put("message", "Persona eliminada");
+        response.put("message", "Nacionalidad eliminada");
         return Response.ok(response.toString()).build();
     }
 }
