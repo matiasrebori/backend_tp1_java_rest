@@ -1,7 +1,8 @@
 package py.com.progweb.prueba.rest;
 
 import org.json.simple.JSONObject;
-import py.com.progweb.prueba.ejb.CabeceraUsoPuntosDAO;
+import py.com.progweb.prueba.ejb.*;
+import py.com.progweb.prueba.model.Bolsapuntos;
 import py.com.progweb.prueba.model.CabeceraUsoPuntos;
 import py.com.progweb.prueba.model.DetalleUsoPuntos;
 
@@ -21,42 +22,48 @@ public class ServiciosResource {
     @Inject
     private CabeceraUsoPuntosDAO cabeceraUsoPuntosDAO;
 
-//    @Inject
-//    private ConceptoUsoPuntosDAO conceptousoPuntosDAO;
+    @Inject
+    private ConceptoPuntosDAO conceptousoPuntosDAO;
+
+    @Inject
+    private PuntosDAO puntosDAO;
+
+    @Inject
+    private VencimientoPuntosDAO vencimientoPuntosDAO;
+
+    @Inject
+    private BolsapuntosDAO bolsapuntosDAO;
 
 
-//    /**
-//     * Consume un JSON para cargar los puntos a un cliente a través del monto de su operación
-//     * JSON: [{ "id_cliente": id_cliente, "monto_operacion": monto }]
-//     * */
-//    @POST
-//    @Path("/cargar_puntos/")
-//    public Response cargarPuntos(JSONObject json){
-//
-//        // TODO: mover al DAO de la regla de puntos cuando esté. También cambiar los nombres que correspondan
-//
-//        // ver cuántos puntos genera este monto (futuro método conceptoUsoPuntosDAO.puntosNecesariosConcepto())
-//        List<ReglaPuntos> listaReglas = em.createQuery("" +
-//                                "select r " +
-//                                "from regla c " +
-//                                "where :monto between r.limite_inferior and r.limite_superior" +
-//                                "or r.limite_inferior is null",
-//                        CabeceraUsoPuntos.class)
-//                .setParameter("monto", json.get("monto"))
-//                .getResultList();
-//        // calcular puntos
-//        int puntos = 0;
-//        for (ReglaPuntos r: listaReglas) {
-//            puntos += Math.round(json.get("monto")/r.monto_equivalencia);
-//        }
-//        // asignarle estos puntos al cliente
-//        // TODO: llamar_post_de_bolsa_puntos_y_pasarle_los_datos
-//
-//
-//        JSONObject response = new JSONObject();
-//        response.put("message", "Puntos asignados correctamente. Se asignaron: " + puntos + " puntos.");
-//        return Response.ok(response.toString()).build();
-//    }
+    /**
+     * Consume un JSON para cargar los puntos a un cliente a través del monto de su operación
+     * JSON: [{ "id_cliente": id_cliente, "monto_operacion": monto }]
+     * */
+    @POST
+    @Path("/cargar_puntos/")
+    public Response cargarPuntos(JSONObject json){
+
+        int monto = Integer.parseInt(json.get("monto").toString());
+
+        // ver cuántos puntos genera este monto (futuro método conceptoUsoPuntosDAO.puntosNecesariosConcepto())
+        int puntos = puntosDAO.puntosTotalesGenerados(monto);
+
+        // asignarle estos puntos al cliente
+        Bolsapuntos bolsa = new Bolsapuntos();
+        bolsa.setFecha_asignacion(new Date(System.currentTimeMillis()));
+        bolsa.setId_cliente(Integer.parseInt(json.get("id_cliente").toString()));
+        bolsa.setMonto_operacion(monto);
+        bolsa.setPuntaje_asignado(monto);
+        bolsa.setPuntaje_utilizado(0);
+        bolsa.setSaldo_puntos(monto);
+        bolsa.setFecha_caducidad(vencimientoPuntosDAO.getFechaCaducidad());
+
+        bolsapuntosDAO.crear(bolsa);
+
+        JSONObject response = new JSONObject();
+        response.put("message", "Puntos asignados correctamente. Se asignaron: " + puntos + " puntos.");
+        return Response.ok(response.toString()).build();
+    }
 
     // TODO: Cambiar todos los nombres a sus respectivos nombres cuando estén los demás módulos
 //    /**

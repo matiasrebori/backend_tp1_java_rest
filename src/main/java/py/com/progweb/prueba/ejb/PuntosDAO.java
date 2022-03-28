@@ -1,5 +1,6 @@
 package py.com.progweb.prueba.ejb;
 
+import py.com.progweb.prueba.model.CabeceraUsoPuntos;
 import py.com.progweb.prueba.model.Puntos;
 
 import javax.ejb.Stateless;
@@ -28,5 +29,25 @@ public class PuntosDAO {
     public void eliminar(Integer id) {
         Puntos puntos = this.em.find(Puntos.class, id);
         this.em.remove(puntos);
+    }
+
+    public Integer puntosTotalesGenerados(Integer monto) {
+
+        // ver cuántos puntos genera este monto
+        List<Puntos> listaReglas = em.createQuery("" +
+                                "select r " +
+                                "from puntos r " +
+                                "where r.lim_inf is null " +
+                                "or :monto between r.lim_inf and r.lim_sup",
+                        Puntos.class)
+                .setParameter("monto", monto)
+                .getResultList();
+        // calcular puntos
+        int puntos = 0;
+        for (Puntos r: listaReglas) {
+            puntos += Math.round((float)monto/(float)r.getMonto_equivalencia());
+        }
+
+        return puntos;
     }
 }

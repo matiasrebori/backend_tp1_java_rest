@@ -1,8 +1,10 @@
 package py.com.progweb.prueba.rest;
 
 import org.json.simple.JSONObject;
+import py.com.progweb.prueba.ejb.BolsapuntosDAO;
 import py.com.progweb.prueba.ejb.CabeceraUsoPuntosDAO;
 import py.com.progweb.prueba.ejb.ClienteDAO;
+import py.com.progweb.prueba.model.Bolsapuntos;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -22,8 +24,8 @@ public class ConsultaResource {
     @Inject
     private CabeceraUsoPuntosDAO cabeceraUsoPuntosDAO;
 
-//    @Inject
-//    private BolsaPuntosDAO bolsaPuntosDAO;
+    @Inject
+    private BolsapuntosDAO bolsaPuntosDAO;
 
     @Inject
     private ClienteDAO clienteDAO;
@@ -61,41 +63,37 @@ public class ConsultaResource {
 
     // ==== Bolsa de puntos ==== //
 
-    // TODO: Ponerle el nombre correcto de BolsaPuntosDAO cuando esté el módulo 5
-    // TODO: También armar dentro de la clase el método para realizar esta funcionalidad bolsaPuntosPorCliente
     /**
      * Devuelve una lista con las bolsas de puntos por clientes
      * */
-//    @GET
-//    @Path("/bolsa_puntos_por_cliente/{id}")
-//    public Response bolsaPuntosPorCliente(@PathParam("id") Integer id){
-//        return Response.ok(bolsaPuntosDAO.getBolsasPorCliente(id)).build();
-//    }
+    @GET
+    @Path("/bolsa_puntos_por_cliente/{id}")
+    public Response bolsaPuntosPorCliente(@PathParam("id") Integer id){
+        return Response.ok(bolsaPuntosDAO.getBolsasPorCliente(id)).build();
+    }
 
-    // TODO: Ponerle el nombre correcto de BolsaPuntosDAO cuando esté el módulo 5
-    // TODO: También armar dentro de la clase el método para realizar esta funcionalidad bolsaPuntosPorRango
     /**
-     * Consume un JSON y devuelve una lista con las bolsas de puntos por clientes
+     * Consume un JSON y devuelve una lista con las bolsas de puntos por rangos
      * JSON: [{ "inicio": i, "fin": f }]
      * */
-//    @GET
-//    @Path("/bolsa_puntos_por_rango_puntos/")
-//    public Response bolsaPuntosPorRango(JSONObject json){
-//        return Response.ok(bolsaPuntosDAO.getBolsasPorRangoPuntos(json.get("inicio"), json.get("fin"))).build();
-//    }
+    @GET
+    @Path("/bolsa_puntos_por_rango_puntos/")
+    public Response bolsaPuntosPorRango(JSONObject json){
+        return Response.ok(bolsaPuntosDAO.getBolsasPorRangoPuntos(
+                Integer.parseInt(json.get("inicio").toString()), Integer.parseInt(json.get("fin").toString())
+        )).build();
+    }
 
     // Bolsa de Puntos - Clientes
 
-    // TODO: Ponerle el nombre correcto de BolsaPuntosDAO cuando esté el módulo 5
-    // TODO: También armar dentro de la clase el método para realizar esta funcionalidad bolsaPuntosPorCliente
     /**
      * Devuelve una lista con los clientes con puntos a vencer en x días
      * */
-//    @GET
-//    @Path("/clientes_con_puntos_a_vencer_en/{x}")
-//    public Response clientesConPuntosVencerEnX(@PathParam("x") Integer id){
-//        return Response.ok(bolsaPuntosDAO.getClientesConPuntosVencerEnX(x)).build();
-//    }
+    @GET
+    @Path("/clientes_con_puntos_a_vencer_en/{x}")
+    public Response clientesConPuntosVencerEnX(@PathParam("x") Integer x){
+        return Response.ok(bolsaPuntosDAO.getClientesConPuntosVencerEnX(x)).build();
+    }
 
 
     // ==== Clientes ==== //

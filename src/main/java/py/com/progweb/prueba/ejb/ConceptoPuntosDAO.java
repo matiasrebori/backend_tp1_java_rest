@@ -33,4 +33,5 @@ public class ConceptoPuntosDAO {
         ConceptoPuntos conceptoPuntos = this.em.find(ConceptoPuntos.class, id);
         this.em.remove(conceptoPuntos);
     }
+
 }
