@@ -9,8 +9,7 @@ import javax.persistence.*;
 @Table(name = "detalle_uso_puntos")
 public class DetalleUsoPuntos {
     @Id
-    @GeneratedValue(generator = "detalle_uso_puntosSeq", strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(name = "detalle_uso_puntosSeq", sequenceName = "detalle_uso_puntos_seq", allocationSize = 0)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
@@ -25,7 +24,7 @@ public class DetalleUsoPuntos {
 
 
     @ManyToOne
-    @JoinColumn(name = "id_bolsa_de_puntos")
+    @JoinColumn(name = "id_bolsa_puntos")
     private Bolsapuntos idBolsaDePuntos;
 
     public DetalleUsoPuntos(){}

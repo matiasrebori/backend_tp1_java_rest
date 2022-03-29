@@ -7,7 +7,10 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Stateless
@@ -42,13 +45,13 @@ public class ClienteDAO {
      *
      * @return List
      * */
-    public List<CabeceraUsoPuntos> getClientesPorNombre(String nombre) {
+    public List<Cliente> getClientesPorNombre(String nombre) {
         return em.createQuery("" +
                                 "select c " +
-                                "from cliente c " +
-                                "where c.nombre like :nombre",
-                        CabeceraUsoPuntos.class)
-                .setParameter("nombre", nombre)
+                                "from Cliente c " +
+                                "where lower(c.nombre) like :nombre",
+                        Cliente.class)
+                .setParameter("nombre", "%" + nombre + "%")
                 .getResultList();
     }
 
@@ -60,10 +63,10 @@ public class ClienteDAO {
     public List<Cliente> getClientesPorApellido(String apellido) {
         return em.createQuery("" +
                                 "select c " +
-                                "from cliente c " +
-                                "where c.apellido like :apellido",
-                        CabeceraUsoPuntos.class)
-                .setParameter("apellido", nombre)
+                                "from Cliente c " +
+                                "where lower(c.apellido) like :apellido",
+                        Cliente.class)
+                .setParameter("apellido", "%" + apellido + "%")
                 .getResultList();
     }
 
@@ -72,13 +75,14 @@ public class ClienteDAO {
      *
      * @return List
      * */
-    public List<Cliente> getClientesPorCumpleanhos(String cumpleanhos) {
+    public List<Cliente> getClientesPorCumpleanhos(String cumpleanhos) throws ParseException {
+        Date fecha = new SimpleDateFormat("dd-MM-yyyy").parse(cumpleanhos);
         return em.createQuery("" +
                                 "select c " +
-                                "from cliente c " +
-                                "where c.fecha_nacimiento=:cumpleanhos",
-                        CabeceraUsoPuntos.class)
-                .setParameter("cumpleanhos", nombre)
+                                "from Cliente c " +
+                                "where c.fechaNacimiento=:cumpleanhos",
+                        Cliente.class)
+                .setParameter("cumpleanhos", fecha)
                 .getResultList();
     }
 }

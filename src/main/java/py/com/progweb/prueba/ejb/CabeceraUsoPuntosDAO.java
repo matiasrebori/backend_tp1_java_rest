@@ -18,7 +18,7 @@ public class CabeceraUsoPuntosDAO {
     private EntityManager em;
 
     public List<CabeceraUsoPuntos> listar(){
-        return em.createQuery("select c from cabecera_uso_puntos c", CabeceraUsoPuntos.class).getResultList();
+        return em.createQuery("select c from CabeceraUsoPuntos c", CabeceraUsoPuntos.class).getResultList();
     }
 
 
@@ -44,8 +44,8 @@ public class CabeceraUsoPuntosDAO {
     public List<CabeceraUsoPuntos> getCabecerasPorConcepto(Integer id_concepto){
         return em.createQuery("" +
                         "select c " +
-                        "from cabecera_uso_puntos c " +
-                        "where c.concepto_uso_puntos=:idConcepto",
+                        "from CabeceraUsoPuntos c " +
+                        "where c.id_concepto_uso_puntos.id=:idConcepto",
                         CabeceraUsoPuntos.class)
                 .setParameter("idConcepto", id_concepto)
                 .getResultList();
@@ -59,7 +59,7 @@ public class CabeceraUsoPuntosDAO {
     public List<CabeceraUsoPuntos> getCabecerasPorFechaUso(Date fecha_uso){
         return em.createQuery("" +
                         "select c " +
-                        "from cabecera_uso_puntos c " +
+                        "from CabeceraUsoPuntos c " +
                         "where c.fecha=:fechaUso",
                         CabeceraUsoPuntos.class)
                 .setParameter("fechaUso", fecha_uso)
@@ -74,8 +74,8 @@ public class CabeceraUsoPuntosDAO {
     public List<CabeceraUsoPuntos> getCabecerasPorCliente(Integer id){
         return em.createQuery("" +
                         "select c " +
-                        "from cabecera_uso_puntos c " +
-                        "where c.id_cliente=:id",
+                        "from CabeceraUsoPuntos c " +
+                        "where c.id_cliente.id=:id",
                         CabeceraUsoPuntos.class)
                 .setParameter("id", id)
                 .getResultList();

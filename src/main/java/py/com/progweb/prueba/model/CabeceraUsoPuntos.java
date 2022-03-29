@@ -10,10 +10,8 @@ import java.util.Date;
 @Table(name = "cabecera_uso_puntos")
 public class CabeceraUsoPuntos {
 
-
     @Id
-    @GeneratedValue(generator = "cabecera_uso_puntosSeq", strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(name = "cabecera_uso_puntosSeq", sequenceName = "cabecera_uso_puntos_seq", allocationSize = 0)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
@@ -32,7 +30,7 @@ public class CabeceraUsoPuntos {
 
     @ManyToOne
     @JoinColumn(name = "id_concepto_uso_puntos")
-    private ConceptoPuntos conceptoPuntos;
+    private ConceptoPuntos id_concepto_uso_puntos;
 
     public CabeceraUsoPuntos() {
     }
@@ -69,11 +67,11 @@ public class CabeceraUsoPuntos {
         this.fecha = fecha;
     }
 
-    public ConceptoPuntos getConceptoPuntos() {
-        return conceptoPuntos;
+    public ConceptoPuntos getId_concepto_uso_puntos() {
+        return id_concepto_uso_puntos;
     }
 
     public void setConceptoUsoPunto(ConceptoPuntos conceptoUsoPunto) {
-        this.conceptoPuntos = conceptoUsoPunto;
+        this.id_concepto_uso_puntos = conceptoUsoPunto;
     }
 }

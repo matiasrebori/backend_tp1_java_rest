@@ -34,4 +34,12 @@ public class ConceptoPuntosDAO {
         this.em.remove(conceptoPuntos);
     }
 
+    public Integer puntosNecesariosConcepto(Integer id){
+        return em.createQuery("select c " +
+                "from ConceptoPuntos c " +
+                "where c.id=:id", ConceptoPuntos.class)
+                .setParameter("id", id)
+                .getResultList().get(0).getPuntosRequeridos();
+    }
+
 }

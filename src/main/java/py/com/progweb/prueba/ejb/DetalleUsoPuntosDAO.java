@@ -17,7 +17,7 @@ public class DetalleUsoPuntosDAO {
     private EntityManager em;
 
     public List<DetalleUsoPuntos> listar(){
-        return em.createQuery("select detalle from detalle_uso_puntos", DetalleUsoPuntos.class).getResultList();
+        return em.createQuery("select detalle from DetalleUsoPuntos", DetalleUsoPuntos.class).getResultList();
     }
 
     public DetalleUsoPuntos obtener(Integer id){

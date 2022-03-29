@@ -36,16 +36,16 @@ public class PuntosDAO {
         // ver cuántos puntos genera este monto
         List<Puntos> listaReglas = em.createQuery("" +
                                 "select r " +
-                                "from puntos r " +
+                                "from Puntos r " +
                                 "where r.lim_inf is null " +
                                 "or :monto between r.lim_inf and r.lim_sup",
                         Puntos.class)
                 .setParameter("monto", monto)
                 .getResultList();
-        // calcular puntos
+        // calcular puntos. Se utiliza la función floor para asignar los puntos
         int puntos = 0;
         for (Puntos r: listaReglas) {
-            puntos += Math.round((float)monto/(float)r.getMonto_equivalencia());
+            puntos += Math.floorDiv(monto,r.getMonto_equivalencia());
         }
 
         return puntos;

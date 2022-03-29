@@ -10,6 +10,8 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -38,8 +40,8 @@ public class ConsultaResource {
      * */
     @GET
     @Path("/uso_puntos_por_concepto/{id_concepto}")
-    public Response usoPuntosPorConcepto(@PathParam("id_concepto") Integer id_concpeto){
-        return Response.ok(cabeceraUsoPuntosDAO.getCabecerasPorConcepto(id_concpeto)).build();
+    public Response usoPuntosPorConcepto(@PathParam("id_concepto") Integer id_concepto){
+        return Response.ok(cabeceraUsoPuntosDAO.getCabecerasPorConcepto(id_concepto)).build();
     }
 
     /**
@@ -47,8 +49,9 @@ public class ConsultaResource {
      * */
     @GET
     @Path("/uso_puntos_por_fecha_uso/{fecha}")
-    public Response usoPuntosPorFechaUso(@PathParam("fecha") Date fecha){
-        return Response.ok(cabeceraUsoPuntosDAO.getCabecerasPorFechaUso(fecha)).build();
+    public Response usoPuntosPorFechaUso(@PathParam("fecha") String fecha) throws ParseException {
+        Date fecha_date = new SimpleDateFormat("dd-MM-yyyy").parse(fecha);
+        return Response.ok(cabeceraUsoPuntosDAO.getCabecerasPorFechaUso(fecha_date)).build();
     }
 
     /**
@@ -92,7 +95,7 @@ public class ConsultaResource {
     @GET
     @Path("/clientes_con_puntos_a_vencer_en/{x}")
     public Response clientesConPuntosVencerEnX(@PathParam("x") Integer x){
-        return Response.ok(bolsaPuntosDAO.getClientesConPuntosVencerEnX(x)).build();
+        return Response.ok(bolsaPuntosDAO.getClientesConPuntosVencerEnX(x, clienteDAO)).build();
     }
 
 
@@ -121,7 +124,7 @@ public class ConsultaResource {
      * */
     @GET
     @Path("/clientes_por_cumpleanhos/{cumpleanhos}")
-    public Response clientesPorCumpleanhos(@PathParam("cumpleanhos") String cumpleanhos){
+    public Response clientesPorCumpleanhos(@PathParam("cumpleanhos") String cumpleanhos) throws ParseException {
         return Response.ok(clienteDAO.getClientesPorCumpleanhos(cumpleanhos)).build();
     }
 }

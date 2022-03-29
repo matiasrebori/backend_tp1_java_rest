@@ -9,6 +9,7 @@ import py.com.progweb.prueba.model.DetalleUsoPuntos;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
+import java.util.Date;
 
 /**
  * Módulo 7. Encargado de algunos servicios (POST, GET).
@@ -34,6 +35,12 @@ public class ServiciosResource {
     @Inject
     private BolsapuntosDAO bolsapuntosDAO;
 
+    @Inject
+    private ClienteDAO clienteDAO;
+
+    @Inject
+    private DetalleUsoPuntosDAO detalleUsoPuntosDAO;
+
 
     /**
      * Consume un JSON para cargar los puntos a un cliente a través del monto de su operación
@@ -43,7 +50,7 @@ public class ServiciosResource {
     @Path("/cargar_puntos/")
     public Response cargarPuntos(JSONObject json){
 
-        int monto = Integer.parseInt(json.get("monto").toString());
+        int monto = Integer.parseInt(json.get("monto_operacion").toString());
 
         // ver cuántos puntos genera este monto (futuro método conceptoUsoPuntosDAO.puntosNecesariosConcepto())
         int puntos = puntosDAO.puntosTotalesGenerados(monto);
@@ -53,9 +60,9 @@ public class ServiciosResource {
         bolsa.setFecha_asignacion(new Date(System.currentTimeMillis()));
         bolsa.setId_cliente(Integer.parseInt(json.get("id_cliente").toString()));
         bolsa.setMonto_operacion(monto);
-        bolsa.setPuntaje_asignado(monto);
+        bolsa.setPuntaje_asignado(puntos);
         bolsa.setPuntaje_utilizado(0);
-        bolsa.setSaldo_puntos(monto);
+        bolsa.setSaldo_puntos(puntos);
         bolsa.setFecha_caducidad(vencimientoPuntosDAO.getFechaCaducidad());
 
         bolsapuntosDAO.crear(bolsa);
@@ -65,97 +72,48 @@ public class ServiciosResource {
         return Response.ok(response.toString()).build();
     }
 
-    // TODO: Cambiar todos los nombres a sus respectivos nombres cuando estén los demás módulos
-//    /**
-//     * Consume un JSON para utilizar los puntos de un cliente
-//     * JSON: [{ "id_cliente": id_cliente, "id_concepto": id_concepto }]
-//     * */
-//    @POST
-//    @Path("/utilizar_puntos/")
-//    public Response utilizarPuntos(JSONObject json){
-//
-//        // obtener cuántos puntos requiere el concepto
-//        int puntos_necesarios = conceptousoPuntosDAO.puntosNecesariosConcepto(json.get(id_concepto));
-//
-//        // intentar descontar los puntos del cliente
-//
-//        // obtener las bolsas de puntos del cliente ordenadas por fecha caducidad
-//        List<BolsaPuntos> listabolsas = em.createQuery("" +
-//                                "select b " +
-//                                "from bolsa_puntos b " +
-//                                "where b.id_cliente=:id_cliente " +
-//                                "order by b.fecha_caducidad",
-//                        CabeceraUsoPuntos.class)
-//                .setParameter("id_cliente", json.get("id_cliente"))
-//                .getResultList();
-//
-//        // recorrer las bolsas hasta alcanzar el puntaje necesario para el concepto
-//        List<BolsaPuntos> bolsasUtilizadas = new List<BolsaPuntos>();
-//        JSONObject montosUtilizadosPorBolsa = new JSONObject(); // para guardar cuántos puntos se van utilizando por bolsa
-//
-//        int monto = puntos_necesarios;
-//        for (BolsaPuntos bolsa : listabolsas) {
-//            bolsa.saldo -= monto;
-//            bolsasUtilizadas.add(bolsa);
-//
-//            // si el saldo fue suficiente
-//            if (bolsa.saldo >= 0) {
-//                bolsa.puntosUtilizados += monto;
-//                montosUtilizadosPorBolsa.put(bolsa.id, monto);
-//                break;
-//
-//            } else { // si fue menor, entonces volver a intentar con la siguiente bolsa
-//                montosUtilizadosPorBolsa.put(bolsa.id, monto + bolsa.saldo);
-//                monto = bolsa.saldo * -1; // hacer positivo lo que le falta para alcanzar
-//                bolsa.saldo = 0; // descontar el saldo de esta bolsa
-//                bolsa.puntosUtilizados = bolsa.puntosAsignados; // ya se usó totalmente el saldo de la bolsa
-//            }
-//        }
-//
-//        // en este punto, si el monto quedó en 0, quiere decir que el saldo fue suficiente, entonces
-//        // registrar el cambio
-//        if (monto == 0) {
-//            // generar la cabecera
-//            CabeceraUsoPuntos cabecera = new CabeceraUsoPuntos();
-//            cabecera.setIdCliente(id_cliente);
-//            cabecera.setPuntajeUtilizado(puntos_necesarios);
-//            cabecera.setFecha(new Date(System.currentTimeMillis()));
-//            cabecera.setConceptoUsoPunto(json.get(id_concepto));
-//
-//            // generar los detalles por cada bolsa utilizada
-//            List<DetalleUsoPuntos> detalles = new List<DetalleUsoPuntos>();
-//            for (BolsaPuntos bolsa : bolsasUtilizadas) {
-//                DetalleUsoPuntos detalle = new DetalleUsoPuntos();
-//                detalle.setIdCabecera(cabecera);
-//                detalle.setPuntajeUtilizado(montosUtilizadosPorBolsa.get(bolsa.id));
-//                detalle.setIdBolsaPuntos(bolsa);
-//                detalles.add(detalle);
-//            }
-//
-//            JSONObject response = new JSONObject();
-//            response.put("message", "Operación realizada con éxito");
-//            return Response.ok(response.toString()).build();
-//
-//        // caso saldo insuficiente
-//        } else {
-//            return Response.notModified("El cliente posee puntos insuficientes para la operación").build();
-//        }
-//
-//    }
+    /**
+     * Consume un JSON para utilizar los puntos de un cliente
+     * JSON: [{ "id_cliente": id_cliente, "id_concepto": id_concepto }]
+     * */
+    @POST
+    @Path("/utilizar_puntos/")
+    public Response utilizarPuntos(JSONObject json){
 
-//    /***
-//     * Devuelve a cuántos puntos equivale el monto recibido
-//     */
-//    @GET
-//    @Path("/puntos_equivalentes/{monto}")
-//    public Response puntosEquivalentes(@PathParam("monto") Integer monto){
-//
-//        //TODO: llamar al DAO de la regla de puntos
-//        puntos = ReglaPuntosDAO.puntajeEquivalente(monto);
-//
-//        JSONObject response = new JSONObject();
-//        response.put("message",
-//        "Los puntos equivalentes al monto " + monto + " son de " + puntaje_equivalente + "puntos.");
-//        return Response.ok(response.toString()).build();
-//    }
+        // obtener cuántos puntos requiere el concepto
+        int puntos_necesarios = conceptousoPuntosDAO.puntosNecesariosConcepto(
+                Integer.parseInt(json.get("id_concepto").toString()));
+
+        // intentar utilizar los puntos
+        Boolean exito = bolsapuntosDAO.descontarPuntosCliente(
+                json, puntos_necesarios, clienteDAO.obtener(Integer.parseInt(json.get("id_cliente").toString())),
+                conceptousoPuntosDAO.obtener(Integer.parseInt(json.get("id_concepto").toString())),
+                cabeceraUsoPuntosDAO, detalleUsoPuntosDAO, bolsapuntosDAO);
+
+        if (exito){
+            JSONObject response = new JSONObject();
+            response.put("message", "Operación realizada con éxito (" +
+                    conceptousoPuntosDAO.obtener(Integer.parseInt(json.get("id_concepto").toString())).getDescripcion()
+            +")");
+            return Response.ok(response.toString()).build();
+        } else{
+            return Response.notModified("El cliente posee puntos insuficientes para la operación").build();
+        }
+
+    }
+
+    /***
+     * Devuelve a cuántos puntos equivale el monto recibido
+     */
+    @GET
+    @Path("/puntos_equivalentes/{monto}")
+    public Response puntosEquivalentes(@PathParam("monto") Integer monto){
+
+        Integer puntos = puntosDAO.puntosTotalesGenerados(monto);
+
+        JSONObject response = new JSONObject();
+        response.put("message",
+        "Los puntos equivalentes al monto " + monto + " son de " + puntos + " puntos.");
+        return Response.ok(response.toString()).build();
+    }
 }
