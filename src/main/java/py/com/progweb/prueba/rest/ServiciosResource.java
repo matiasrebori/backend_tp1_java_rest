@@ -2,9 +2,7 @@ package py.com.progweb.prueba.rest;
 
 import org.json.simple.JSONObject;
 import py.com.progweb.prueba.ejb.*;
-import py.com.progweb.prueba.model.Bolsapuntos;
-import py.com.progweb.prueba.model.CabeceraUsoPuntos;
-import py.com.progweb.prueba.model.DetalleUsoPuntos;
+import py.com.progweb.prueba.model.*;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -80,22 +78,32 @@ public class ServiciosResource {
     @Path("/utilizar_puntos/")
     public Response utilizarPuntos(JSONObject json){
 
+        Cliente cliente = clienteDAO.obtener(Integer.parseInt(json.get("id_cliente").toString()));
+        ConceptoPuntos concepto = conceptousoPuntosDAO.obtener(Integer.parseInt(json.get("id_concepto").toString()));
+
         // obtener cuántos puntos requiere el concepto
         int puntos_necesarios = conceptousoPuntosDAO.puntosNecesariosConcepto(
                 Integer.parseInt(json.get("id_concepto").toString()));
 
         // intentar utilizar los puntos
         Boolean exito = bolsapuntosDAO.descontarPuntosCliente(
-                json, puntos_necesarios, clienteDAO.obtener(Integer.parseInt(json.get("id_cliente").toString())),
-                conceptousoPuntosDAO.obtener(Integer.parseInt(json.get("id_concepto").toString())),
+                json, puntos_necesarios, cliente,
+                concepto,
                 cabeceraUsoPuntosDAO, detalleUsoPuntosDAO, bolsapuntosDAO);
 
         if (exito){
+
+            // enviar email como comprobante
+            TLSEmailConfig.enviarEmail(cliente.getEmail(), "Uso de puntos",
+                    "Usted ha utilizado " + puntos_necesarios + " en concepto de " + concepto.getDescripcion());
+
+            // responder a la solicitud
             JSONObject response = new JSONObject();
             response.put("message", "Operación realizada con éxito (" +
                     conceptousoPuntosDAO.obtener(Integer.parseInt(json.get("id_concepto").toString())).getDescripcion()
             +")");
             return Response.ok(response.toString()).build();
+
         } else{
             return Response.notModified("El cliente posee puntos insuficientes para la operación").build();
         }
