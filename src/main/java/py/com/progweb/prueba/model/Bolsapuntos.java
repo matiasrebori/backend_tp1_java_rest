@@ -12,9 +12,9 @@ public class Bolsapuntos {
     private Integer id;
 
 
-    @ManyToOne
-    @JoinColumn(name = "id_cliente", referencedColumnName = "id")
-    private Cliente id_cliente;
+    @Column(name = "id_cliente")
+    @Basic(optional = false)
+    private Integer id_cliente;
 
     @Column(name = "fecha_asignacion")
     @Temporal(TemporalType.DATE)
@@ -54,11 +54,11 @@ public class Bolsapuntos {
         this.id = id;
     }
 
-    public Cliente getId_cliente() {
+    public Integer getId_cliente() {
         return id_cliente;
     }
 
-    public void setId_cliente(Cliente id_cliente) {
+    public void setId_cliente(Integer id_cliente) {
         this.id_cliente = id_cliente;
     }
 

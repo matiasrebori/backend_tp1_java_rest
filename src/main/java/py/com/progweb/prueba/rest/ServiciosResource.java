@@ -56,7 +56,7 @@ public class ServiciosResource {
         // asignarle estos puntos al cliente
         Bolsapuntos bolsa = new Bolsapuntos();
         bolsa.setFecha_asignacion(new Date(System.currentTimeMillis()));
-        bolsa.setId_cliente(clienteDAO.obtener(Integer.parseInt(json.get("id_cliente").toString())));
+        bolsa.setId_cliente(Integer.parseInt(json.get("id_cliente").toString()));
         bolsa.setMonto_operacion(monto);
         bolsa.setPuntaje_asignado(puntos);
         bolsa.setPuntaje_utilizado(0);

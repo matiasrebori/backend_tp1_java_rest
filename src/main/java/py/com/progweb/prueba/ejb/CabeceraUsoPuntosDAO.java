@@ -75,7 +75,7 @@ public class CabeceraUsoPuntosDAO {
         return em.createQuery("" +
                         "select c " +
                         "from CabeceraUsoPuntos c " +
-                        "where c.id_cliente.id=:id",
+                        "where c.idCliente.id=:id",
                         CabeceraUsoPuntos.class)
                 .setParameter("id", id)
                 .getResultList();
