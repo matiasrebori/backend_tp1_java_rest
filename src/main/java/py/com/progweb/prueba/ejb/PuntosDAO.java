@@ -1,6 +1,5 @@
 package py.com.progweb.prueba.ejb;
 
-import py.com.progweb.prueba.model.CabeceraUsoPuntos;
 import py.com.progweb.prueba.model.Puntos;
 
 import javax.ejb.Stateless;

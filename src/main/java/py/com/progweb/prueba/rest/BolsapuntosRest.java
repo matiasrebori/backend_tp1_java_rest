@@ -9,6 +9,9 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 
+@Path("/bolsapuntos")
+@Consumes("application/json")
+@Produces("application/json")
 public class BolsapuntosRest {
     @Inject
     private BolsapuntosDAO bolsapuntosDAO;

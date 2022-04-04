@@ -6,18 +6,19 @@ import java.util.Date;
 @Table(name = "vencimiento_puntos")
 public class VencimientoPuntos {
     @Id
-    @GeneratedValue(generator = "vencimientoSeq", strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(name = "vencimientoSeq", sequenceName = "vencimiento_puntos_id_sec", allocationSize = 0)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
 
     @Column(name = "fecha_inicio")
-    @Basic(optional = false)
+    @Temporal(TemporalType.DATE)
+    @Basic
     private Date fecha_inicio;
 
     @Column(name = "fecha_fin")
-    @Basic(optional = false)
+    @Temporal(TemporalType.DATE)
+    @Basic
     private Date fecha_fin;
 
     @Column(name = "dias_duracion")

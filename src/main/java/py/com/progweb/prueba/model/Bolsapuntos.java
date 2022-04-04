@@ -6,8 +6,7 @@ import java.util.Date;
 @Table(name = "bolsa_puntos")
 public class Bolsapuntos {
     @Id
-    @GeneratedValue(generator = "bolsaSeq", strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(name = "bolsaSeq", sequenceName = "bolsa_puntos_id_seq", allocationSize = 0)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
@@ -17,11 +16,13 @@ public class Bolsapuntos {
     private Integer id_cliente;
 
     @Column(name = "fecha_asignacion")
-    @Basic(optional = false)
+    @Temporal(TemporalType.DATE)
+    @Basic
     private Date fecha_asignacion;
 
     @Column(name = "fecha_caducidad")
-    @Basic(optional = false)
+    @Temporal(TemporalType.DATE)
+    @Basic
     private Date fecha_caducidad;
 
     @Column(name = "puntaje_asignado")
