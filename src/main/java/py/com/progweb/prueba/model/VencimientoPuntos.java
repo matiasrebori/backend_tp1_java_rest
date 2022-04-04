@@ -12,12 +12,12 @@ public class VencimientoPuntos {
     private Integer id;
 
     @Column(name = "fecha_inicio")
-    @Temporal(TemporalType.DATE)
+//    @Temporal(TemporalType.DATE)
     @Basic
     private Date fecha_inicio;
 
     @Column(name = "fecha_fin")
-    @Temporal(TemporalType.DATE)
+//    @Temporal(TemporalType.DATE)
     @Basic
     private Date fecha_fin;
 

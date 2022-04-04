@@ -3,6 +3,7 @@ package py.com.progweb.prueba.ejb;
 import py.com.progweb.prueba.model.VencimientoPuntos;
 
 import javax.ejb.Local;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.time.LocalDate;
@@ -10,6 +11,7 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
+@Stateless
 public class VencimientoPuntosDAO {
     @PersistenceContext(unitName = "pruebaPU")
     private EntityManager em;
