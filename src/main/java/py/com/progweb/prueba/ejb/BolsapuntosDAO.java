@@ -6,7 +6,9 @@ import py.com.progweb.prueba.model.*;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.ws.rs.core.Response;
+import java.text.MessageFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -155,5 +157,14 @@ public class BolsapuntosDAO {
         } else {
             return false;
         }
+    }
+
+    /**
+     * Modulo 9, asigna puntos = 0 a una bolsa de puntos
+     */
+    public List<Integer> listarVencidos(){
+        Query q = em.createNativeQuery("SELECT id FROM bolsa_puntos WHERE fecha_caducidad <= current_date;");
+        List<Integer> idBolsas = q.getResultList();
+        return idBolsas;
     }
 }
